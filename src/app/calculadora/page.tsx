@@ -27,7 +27,7 @@ const preguntas: Pregunta[] = [
   {
     pregunta: "¿Qué margen usa para decir que voy a tiempo?",
     respuesta:
-      "El mayor entre un día de ritmo y el 5 % del total de la meta. Si la diferencia con lo previsto está dentro de ese margen, el veredicto es «vas a tiempo». Así un libro a medias o una semana floja no cambian el veredicto, pero un retraso real sí.",
+      "El mayor entre un día de ritmo y el 5 % del total de la meta. Si la diferencia con lo previsto está dentro de ese margen, el veredicto es «vas a tiempo». Así un libro a medias o una semana floja no cambian el veredicto, pero un retraso real sí.",
   },
   {
     pregunta: "¿Sirve para metas que bajan, como una deuda?",
@@ -75,7 +75,7 @@ export default function Page() {
           </li>
           <li>
             <strong>Lee el ritmo.</strong> Por día, por semana y por mes, con las fechas en las que deberías pasar por
-            el 25, el 50 y el 75 %.
+            el 25, el 50 y el 75 %.
           </li>
           <li>
             <strong>Vuelve cada semana.</strong> Escribe en «Hoy llevo» el valor en el que estás y la calculadora te
@@ -129,7 +129,7 @@ export default function Page() {
               </tr>
               <tr>
                 <td>Margen</td>
-                <td>El mayor entre un día de ritmo y el 5 % del total</td>
+                <td>El mayor entre un día de ritmo y el 5 % del total</td>
               </tr>
               <tr>
                 <td>Veredicto</td>
@@ -148,7 +148,7 @@ export default function Page() {
               </tr>
               <tr>
                 <td>Hitos</td>
-                <td>El día en que el reparto uniforme alcanza el 25, el 50, el 75 y el 100 %</td>
+                <td>El día en que el reparto uniforme alcanza el 25, el 50, el 75 y el 100 %</td>
               </tr>
             </tbody>
           </table>

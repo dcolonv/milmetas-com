@@ -234,7 +234,7 @@ export const areas: Area[] = [
       "Ejemplos de metas para cuidar a tu pareja, tu familia y tus amistades: llamadas, comidas, planes y tiempo sin pantallas, con cifra y plazo.",
     resumen: "Tiempo con la gente que te importa, puesto en el calendario.",
     intro: [
-      "Las relaciones no se miden, pero el tiempo que les dedicas sí. Nadie cuida una amistad «al 80 %»; lo que puedes contar es cuántas veces llamaste, comiste con alguien o apagaste el móvil durante la cena. Una meta en esta área es una forma de reservar ese tiempo antes de que lo ocupe todo lo demás.",
+      "Las relaciones no se miden, pero el tiempo que les dedicas sí. Nadie cuida una amistad «al 80 %»; lo que puedes contar es cuántas veces llamaste, comiste con alguien o apagaste el móvil durante la cena. Una meta en esta área es una forma de reservar ese tiempo antes de que lo ocupe todo lo demás.",
       "Que la cifra sea pequeña. El objetivo es que ocurra, no llenar un marcador: una llamada semanal a tus padres durante un año son más de cincuenta conversaciones que, sin meta, quizá habrían sido diez.",
     ],
     consejos: [

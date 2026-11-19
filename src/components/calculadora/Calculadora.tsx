@@ -12,7 +12,7 @@ import {
   type Predeterminados,
 } from "@/lib/enlace";
 import { diasEntre, finDeAnio, formatearFecha, formatearFechaCorta, hoyLocal, sumarDias } from "@/lib/fechas";
-import { conUnidad, formatearNumero, formatearPorcentaje, plural } from "@/lib/formato";
+import { NBSP, conUnidad, formatearNumero, formatearPorcentaje, plural } from "@/lib/formato";
 import {
   borrarMeta,
   guardarMeta,
@@ -72,11 +72,24 @@ function fraseVeredicto(v: Veredicto, a: Avance, e: EntradaPlan, unidad: string)
   }
 }
 
-function Cifra({ titulo, valor, unidad, nota }: { titulo: string; valor: number; unidad: string; nota?: string }) {
+function Cifra({
+  titulo,
+  valor,
+  unidad,
+  nota,
+  ancha = false,
+}: {
+  titulo: string;
+  valor: number;
+  unidad: string;
+  nota?: string;
+  /** Takes the full row on a phone, so three figures do not leave one stranded. */
+  ancha?: boolean;
+}) {
   return (
-    <div className="rounded-xl border border-line bg-paper px-3 py-3">
+    <div className={`rounded-xl border border-line bg-paper px-3 py-3 ${ancha ? "col-span-2 sm:col-span-1" : ""}`}>
       <dt className="text-sm font-semibold text-muted">{titulo}</dt>
-      <dd className="mt-0.5">
+      <dd className="mt-0.5 [overflow-wrap:anywhere]">
         <span className="cifra text-2xl font-extrabold text-ink sm:text-[1.7rem]">{formatearNumero(valor)}</span>
         {unidad ? <span className="ml-1.5 break-words text-sm text-muted">{unidad}</span> : null}
         {nota ? <span className="block text-xs text-muted">{nota}</span> : null}
@@ -160,7 +173,7 @@ function ComoSeCalcula({
           <strong>{n(avance.diferencia)}</strong>.
         </li>
         <li>
-          Margen: el mayor entre un día de ritmo ({n(plan.porDia)}) y el 5 % del total ({n(plan.total * 0.05)}) ={" "}
+          Margen: el mayor entre un día de ritmo ({n(plan.porDia)}) y el 5 % del total ({n(plan.total * 0.05)}) ={" "}
           <strong>{n(avance.tolerancia)}</strong>. Dentro del margen vas a tiempo; por encima, adelantado; por debajo,
           atrasado.
         </li>
@@ -204,7 +217,7 @@ function Resultado({ e, actual, hoy, unidad }: { e: EntradaPlan; actual: number;
         <dl className={`mt-2 grid grid-cols-2 gap-2 ${plan.diasPorSemana < 7 ? "sm:grid-cols-4" : "sm:grid-cols-3"}`}>
           <Cifra titulo="Por día" valor={plan.porDia} unidad={unidad} />
           <Cifra titulo="Por semana" valor={plan.porSemana} unidad={unidad} />
-          <Cifra titulo="Por mes" valor={plan.porMes} unidad={unidad} />
+          <Cifra titulo="Por mes" valor={plan.porMes} unidad={unidad} ancha={plan.diasPorSemana === 7} />
           {plan.diasPorSemana < 7 ? (
             <Cifra
               titulo="Por sesión"
@@ -224,11 +237,11 @@ function Resultado({ e, actual, hoy, unidad }: { e: EntradaPlan; actual: number;
       <dl className="grid gap-2 sm:grid-cols-2">
         <div className="rounded-xl border border-line bg-paper px-3 py-3">
           <dt className="text-sm font-semibold text-muted">Previsto para hoy</dt>
-          <dd className="cifra text-xl font-extrabold">{conUnidad(avance.esperadoValor, unidad)}</dd>
+          <dd className="cifra text-xl font-extrabold [overflow-wrap:anywhere]">{conUnidad(avance.esperadoValor, unidad)}</dd>
         </div>
         <div className="rounded-xl border border-line bg-paper px-3 py-3">
           <dt className="text-sm font-semibold text-muted">Hoy llevas</dt>
-          <dd className="cifra text-xl font-extrabold">{conUnidad(actual, unidad)}</dd>
+          <dd className="cifra text-xl font-extrabold [overflow-wrap:anywhere]">{conUnidad(actual, unidad)}</dd>
         </div>
         {cambioRitmo && nuevoDia !== null ? (
           <div className="rounded-xl border border-line bg-paper px-3 py-3 sm:col-span-2">
@@ -286,7 +299,7 @@ function Resultado({ e, actual, hoy, unidad }: { e: EntradaPlan; actual: number;
               {plan.hitos.map((h) => (
                 <tr key={h.fraccion} className="border-t border-line">
                   <th scope="row" className="px-3 py-2 font-semibold">
-                    {h.fraccion * 100} %
+                    {`${h.fraccion * 100}${NBSP}%`}
                   </th>
                   <td className="cifra px-3 py-2">{conUnidad(h.valor, unidad)}</td>
                   <td className="px-3 py-2">{formatearFecha(h.fecha)}</td>
@@ -372,6 +385,7 @@ function Formulario({ hoy, pre, inicial }: { hoy: string; pre: Predeterminados; 
   const [estado, setEstado] = useState<EstadoForm>(inicial);
   const [idActiva, setIdActiva] = useState<string | null>(null);
   const [aviso, setAviso] = useState("");
+  const [borrada, setBorrada] = useState<MetaGuardada | null>(null);
   const guardadas = useSyncExternalStore(suscribirMisMetas, leerMisMetas, leerMisMetasServidor);
   const uid = useId();
   const id = (nombre: string) => `${uid}-${nombre}`;
@@ -384,6 +398,7 @@ function Formulario({ hoy, pre, inicial }: { hoy: string; pre: Predeterminados; 
   function aplicar(nuevo: EstadoForm) {
     setEstado(nuevo);
     setAviso("");
+    setBorrada(null);
     window.history.replaceState(null, "", `?${estadoAQuery(nuevo)}`);
   }
   const cambiar = (clave: keyof EstadoForm) => (ev: { target: { value: string } }) =>
@@ -397,6 +412,7 @@ function Formulario({ hoy, pre, inicial }: { hoy: string; pre: Predeterminados; 
 
   function guardar() {
     const nuevaId = idActiva ?? `m${Date.now().toString(36)}`;
+    setBorrada(null);
     if (guardarMeta({ id: nuevaId, estado })) {
       setIdActiva(nuevaId);
       setAviso("Meta guardada en este navegador.");
@@ -419,6 +435,7 @@ function Formulario({ hoy, pre, inicial }: { hoy: string; pre: Predeterminados; 
     setEstado(estadoInicial(null, hoy, pre));
     setIdActiva(null);
     setAviso("");
+    setBorrada(null);
     window.history.replaceState(null, "", window.location.pathname);
   }
 
@@ -427,10 +444,19 @@ function Formulario({ hoy, pre, inicial }: { hoy: string; pre: Predeterminados; 
     aplicar(m.estado);
   }
 
+  /** Deleting is immediate, so it comes with an undo. */
   function borrar(m: MetaGuardada) {
     borrarMeta(m.id);
     if (m.id === idActiva) setIdActiva(null);
-    setAviso("Meta borrada de este navegador.");
+    setBorrada(m);
+    setAviso(`Meta «${m.estado.meta.trim() || "sin nombre"}» borrada de este navegador.`);
+  }
+
+  function deshacerBorrado() {
+    if (!borrada) return;
+    guardarMeta(borrada);
+    setBorrada(null);
+    setAviso("Meta recuperada.");
   }
 
   const describe = (nombre: string) => (error(nombre) ? id(`${nombre}-error`) : undefined);
@@ -445,7 +471,7 @@ function Formulario({ hoy, pre, inicial }: { hoy: string; pre: Predeterminados; 
     <div className="space-y-6">
       <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
         <form
-          className="space-y-4 rounded-2xl border border-line bg-surface p-4 sm:p-6"
+          className="space-y-4 rounded-2xl border border-line bg-surface p-4 sm:p-6 lg:self-start"
           onSubmit={(ev) => ev.preventDefault()}
           noValidate
         >
@@ -636,9 +662,6 @@ function Formulario({ hoy, pre, inicial }: { hoy: string; pre: Predeterminados; 
               Empezar de cero
             </button>
           </div>
-          <p role="status" aria-live="polite" className="min-h-6 text-sm font-semibold text-ok">
-            {aviso}
-          </p>
         </form>
 
         <section
@@ -663,6 +686,19 @@ function Formulario({ hoy, pre, inicial }: { hoy: string; pre: Predeterminados; 
           )}
         </section>
       </div>
+
+      <p role="status" aria-live="polite" className="min-h-7 text-[0.95rem] font-semibold text-ok">
+        {aviso}
+        {borrada ? (
+          <button
+            type="button"
+            onClick={deshacerBorrado}
+            className="ml-3 min-h-10 rounded-lg border border-line-strong bg-surface px-3 text-sm font-semibold text-ink hover:border-meta hover:text-meta-dark"
+          >
+            Deshacer
+          </button>
+        ) : null}
+      </p>
 
       <MisMetas guardadas={guardadas} hoy={hoy} activa={idActiva} onAbrir={abrir} onBorrar={borrar} />
     </div>

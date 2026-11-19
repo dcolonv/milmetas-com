@@ -59,12 +59,12 @@ Built from [SPEC.md](SPEC.md). Each milestone ends with the site building, a com
 - [x] Commit: trust pages and search plumbing
 
 ## M6 · Verify
-- [ ] `lint`, tests, `build` pass; route table has no unintended dynamic pages
-- [ ] `site_check.py` against the local production server: no errors, warnings resolved or explained
-- [ ] Interface code reviewed with `web-design-guidelines`; findings fixed
-- [ ] Site opened with `agent-browser`: calculator used with worked example 2, desktop and phone sizes, screenshots reviewed, no console errors
-- [ ] README rewritten for this project
-- [ ] Commit and push: ready to deploy
+- [x] `lint`, tests, `build` pass; route table has no unintended dynamic pages
+- [x] `site_check.py` against the local production server: no errors, warnings resolved or explained
+- [x] Interface code reviewed with `web-design-guidelines`; findings fixed
+- [x] Site opened with `agent-browser`: calculator used with worked example 2, desktop and phone sizes, screenshots reviewed, no console errors
+- [x] README rewritten for this project
+- [x] Commit and push: ready to deploy
 
 ## M7 · Publish
 - [ ] Vercel project created and linked; repository connected

@@ -63,7 +63,7 @@ function PlanDeMuestra() {
       <p className="mt-3 text-[0.95rem]">
         El {formatearFecha(ej.revision!.hoy)} lleva {formatearNumero(ej.revision!.actual)} ({formatearPorcentaje(avance.fraccion)}) y
         tocaban {formatearNumero(avance.esperadoValor)}:{" "}
-        <strong className="rounded bg-late-soft px-1.5 py-0.5 text-late">va atrasado</strong>. Para llegar necesita{" "}
+        <strong className="whitespace-nowrap rounded bg-late-soft px-1.5 py-0.5 text-late">va atrasado</strong>. Para llegar necesita{" "}
         {formatearNumero(avance.ritmoNuevoDia! * 7)} por semana.
       </p>
     </figure>

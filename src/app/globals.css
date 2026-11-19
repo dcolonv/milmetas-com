@@ -29,7 +29,19 @@
 html {
   color-scheme: light;
   scroll-behavior: smooth;
+  /* Keeps focused and anchored elements clear of the sticky header. */
+  scroll-padding-top: 5.5rem;
   -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgb(194 65 12 / 0.15);
+}
+
+a,
+button,
+input,
+select,
+summary,
+label {
+  touch-action: manipulation;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -45,6 +57,8 @@ html {
 }
 
 body {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
@@ -110,6 +124,12 @@ h4 {
 .enlace:hover {
   color: var(--color-meta-dark);
   text-decoration-thickness: 2px;
+}
+
+/* Rows of the long goal list are skipped by layout until they scroll near the viewport. */
+.fila-larga {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 5rem;
 }
 
 .cifra {

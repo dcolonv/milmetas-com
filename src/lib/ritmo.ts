@@ -86,13 +86,22 @@ export function limitarDiasPorSemana(n: number): number {
   return Math.min(7, Math.max(1, Math.round(n)));
 }
 
+/** Why a value cannot be used, or null when it can. */
+export function mensajeNumero(n: number): string | null {
+  if (!Number.isFinite(n)) return "Escribe un número.";
+  if (Math.abs(n) > MAX_VALOR) return "Ese número es demasiado grande. El máximo es un billón.";
+  return null;
+}
+
 export function validarPlan(e: EntradaPlan): ErrorPlan[] {
   const errores: ErrorPlan[] = [];
-  const numeroOk = (n: number) => Number.isFinite(n) && Math.abs(n) <= MAX_VALOR;
+  const numeroOk = (n: number) => mensajeNumero(n) === null;
 
-  if (!numeroOk(e.inicio)) errores.push({ campo: "inicio", mensaje: "Escribe un número." });
-  if (!numeroOk(e.objetivo)) {
-    errores.push({ campo: "objetivo", mensaje: "Escribe un número." });
+  const errorInicio = mensajeNumero(e.inicio);
+  const errorObjetivo = mensajeNumero(e.objetivo);
+  if (errorInicio) errores.push({ campo: "inicio", mensaje: errorInicio });
+  if (errorObjetivo) {
+    errores.push({ campo: "objetivo", mensaje: errorObjetivo });
   } else if (numeroOk(e.inicio) && e.objetivo === e.inicio) {
     errores.push({
       campo: "objetivo",

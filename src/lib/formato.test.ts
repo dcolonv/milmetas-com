@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { aDias, diasEntre, esFechaValida, finDeAnio, formatearFecha, formatearFechaCorta, hoyLocal, sumarDias } from "./fechas";
-import { formatearNumero, formatearPorcentaje, leerNumero, numeroParaCampo } from "./formato";
+import { conUnidad, formatearNumero, formatearPorcentaje, leerNumero, numeroParaCampo } from "./formato";
 import { enlaceCalculadora, estadoAQuery, estadoInicial, interpretar } from "./enlace";
 
 describe("fechas", () => {
@@ -78,9 +78,11 @@ describe("formatearNumero", () => {
     expect(formatearNumero(NaN)).toBe("—");
   });
   it("formats percentages and field values", () => {
-    expect(formatearPorcentaje(0.25)).toBe("25 %");
-    expect(formatearPorcentaje(0.2)).toBe("20 %");
-    expect(formatearPorcentaje(1 / 3)).toBe("33,3 %");
+    expect(formatearPorcentaje(0.25)).toBe("25\u00a0%");
+    expect(formatearPorcentaje(0.2)).toBe("20\u00a0%");
+    expect(formatearPorcentaje(1 / 3)).toBe("33,3\u00a0%");
+    expect(conUnidad(9.5, "km")).toBe("9,5\u00a0km");
+    expect(conUnidad(9.5, "  ")).toBe("9,5");
     expect(numeroParaCampo(1234.5)).toBe("1234,5");
   });
 });
@@ -142,6 +144,8 @@ describe("the plan in the query string", () => {
     expect(ok.actual).toBe(3);
     expect(interpretar(base).actual).toBe(0);
     expect(interpretar({ ...base, llevo: "tres" }).errores.map((e) => e.campo)).toEqual(["llevo"]);
+    expect(interpretar({ ...base, llevo: "6002208202621062027" }).errores.map((e) => e.campo)).toEqual(["llevo"]);
+    expect(interpretar({ ...base, llevo: "1000000000000" }).errores).toEqual([]);
     expect(interpretar({ ...base, a: "" }).errores.map((e) => e.campo)).toEqual(["objetivo"]);
   });
 });

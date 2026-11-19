@@ -1,5 +1,8 @@
 /** Reading and writing numbers the way Spanish speakers type them. */
 
+/** Keeps a number and its unit on the same line. */
+export const NBSP = "\u00a0";
+
 const MILES_CON_PUNTO = /^-?\d{1,3}(\.\d{3})+$/;
 
 /**
@@ -66,13 +69,13 @@ export function numeroParaCampo(n: number): string {
 
 export function formatearPorcentaje(fraccion: number): string {
   if (!Number.isFinite(fraccion)) return "—";
-  return `${formatearNumero(Math.round(fraccion * 1000) / 10)} %`;
+  return `${formatearNumero(Math.round(fraccion * 1000) / 10)}${NBSP}%`;
 }
 
 /** "3 libros", "1 libro" is not attempted: the unit is whatever the visitor typed. */
 export function conUnidad(n: number, unidad: string): string {
   const u = unidad.trim();
-  return u ? `${formatearNumero(n)} ${u}` : formatearNumero(n);
+  return u ? `${formatearNumero(n)}${NBSP}${u}` : formatearNumero(n);
 }
 
 export function plural(n: number, uno: string, varios: string): string {

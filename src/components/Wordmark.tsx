@@ -12,7 +12,10 @@ export function Bandera({ className = "h-6 w-6" }: { className?: string }) {
 
 export function Wordmark() {
   return (
-    <span className="inline-flex items-center gap-2 font-display text-[1.45rem] font-extrabold leading-none tracking-tight">
+    <span
+      translate="no"
+      className="inline-flex items-center gap-2 font-display text-[1.45rem] font-extrabold leading-none tracking-tight"
+    >
       <Bandera className="h-6 w-6 text-ink" />
       <span>
         <span className="text-ink">mil</span>

@@ -7,7 +7,14 @@
 
 import { esFechaValida, sumarDias, type FechaISO } from "./fechas";
 import { leerNumero, numeroParaCampo } from "./formato";
-import { MAX_DIAS, limitarDiasPorSemana, validarPlan, type EntradaPlan, type ErrorPlan } from "./ritmo";
+import {
+  MAX_DIAS,
+  limitarDiasPorSemana,
+  mensajeNumero,
+  validarPlan,
+  type EntradaPlan,
+  type ErrorPlan,
+} from "./ritmo";
 
 export const MAX_NOMBRE = 120;
 export const MAX_UNIDAD = 24;
@@ -103,7 +110,12 @@ export function interpretar(estado: EstadoForm): Interpretado {
   let actual = entrada.inicio;
   if (estado.llevo.trim() !== "") {
     actual = leerNumero(estado.llevo);
-    if (!Number.isFinite(actual)) errores.push({ campo: "llevo", mensaje: "Escribe un número, o deja el campo vacío." });
+    if (!Number.isFinite(actual)) {
+      errores.push({ campo: "llevo", mensaje: "Escribe un número, o deja el campo vacío." });
+    } else {
+      const demasiado = mensajeNumero(actual);
+      if (demasiado) errores.push({ campo: "llevo", mensaje: demasiado });
+    }
   }
   return { entrada, actual, errores };
 }

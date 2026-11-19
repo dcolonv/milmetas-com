@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useId, useMemo, useState, useSyncExternalStore } from "react";
 import type { MetaListada } from "@/lib/banco";
 import { MetaFila } from "./MetaFila";
 
@@ -50,7 +50,38 @@ function Chips({
   );
 }
 
-/** The whole bank with filters by area, horizon and text. All filtering happens in the browser. */
+type Filtros = { area: string; horizonte: string; texto: string };
+
+const sinSuscripcion = () => () => {};
+const queryCliente = () => window.location.search;
+const queryServidor = () => "";
+
+/** Reads `?area=…&plazo=…&q=…`, ignoring values that are not real options. */
+function leerFiltros(query: string, areas: Opcion[], horizontes: Opcion[]): Filtros {
+  const p = new URLSearchParams(query);
+  const area = p.get("area") ?? "";
+  const plazo = p.get("plazo") ?? "";
+  return {
+    area: areas.some((a) => a.slug === area) ? area : "todas",
+    horizonte: horizontes.some((h) => h.slug === plazo) ? plazo : "todos",
+    texto: (p.get("q") ?? "").slice(0, 60),
+  };
+}
+
+function escribirFiltros(f: Filtros) {
+  const p = new URLSearchParams();
+  if (f.area !== "todas") p.set("area", f.area);
+  if (f.horizonte !== "todos") p.set("plazo", f.horizonte);
+  if (f.texto.trim()) p.set("q", f.texto.trim());
+  const query = p.toString();
+  window.history.replaceState(null, "", query ? `?${query}` : window.location.pathname);
+}
+
+/**
+ * The whole bank with filters by area, horizon and text. Filtering happens in
+ * the browser, and the filters live in the query string so a filtered view
+ * can be linked. The server always renders the full list.
+ */
 export function BancoFiltro({
   metas,
   areas,
@@ -60,18 +91,31 @@ export function BancoFiltro({
   areas: Opcion[];
   horizontes: Opcion[];
 }) {
-  const [area, setArea] = useState("todas");
-  const [horizonte, setHorizonte] = useState("todos");
-  const [texto, setTexto] = useState("");
+  // The query string as it was when the page opened; "" on the server, so the first render matches the HTML.
+  const queryInicial = useSyncExternalStore(sinSuscripcion, queryCliente, queryServidor);
+  const [elegidos, setElegidos] = useState<Filtros | null>(null);
+  const filtros = elegidos ?? leerFiltros(queryInicial, areas, horizontes);
+  const { area, horizonte, texto } = filtros;
   const idBusqueda = useId();
 
+  const cambiar = (cambio: Partial<Filtros>) => {
+    const nuevos = { ...filtros, ...cambio };
+    setElegidos(nuevos);
+    escribirFiltros(nuevos);
+  };
+  const setArea = (slug: string) => cambiar({ area: slug });
+  const setHorizonte = (slug: string) => cambiar({ horizonte: slug });
+
+  const buscables = useMemo(() => metas.map((m) => ({ meta: m, texto: sinAcentos(m.texto) })), [metas]);
   const consulta = sinAcentos(texto.trim());
-  const visibles = metas.filter(
-    (m) =>
-      (area === "todas" || m.area === area) &&
-      (horizonte === "todos" || m.horizonte === horizonte) &&
-      (consulta === "" || sinAcentos(m.texto).includes(consulta)),
-  );
+  const visibles = buscables
+    .filter(
+      (b) =>
+        (area === "todas" || b.meta.area === area) &&
+        (horizonte === "todos" || b.meta.horizonte === horizonte) &&
+        (consulta === "" || b.texto.includes(consulta)),
+    )
+    .map((b) => b.meta);
   const filtrando = area !== "todas" || horizonte !== "todos" || consulta !== "";
 
   return (
@@ -94,7 +138,7 @@ export function BancoFiltro({
             type="search"
             autoComplete="off"
             value={texto}
-            onChange={(ev) => setTexto(ev.target.value)}
+            onChange={(ev) => cambiar({ texto: ev.target.value })}
             placeholder="leer, ahorrar, km…"
             className="mt-1.5 block min-h-11 w-full max-w-md rounded-lg border border-line-strong bg-surface px-3 py-2 text-base focus-visible:outline-offset-0"
           />
@@ -109,11 +153,7 @@ export function BancoFiltro({
         {filtrando ? (
           <button
             type="button"
-            onClick={() => {
-              setArea("todas");
-              setHorizonte("todos");
-              setTexto("");
-            }}
+            onClick={() => cambiar({ area: "todas", horizonte: "todos", texto: "" })}
             className="min-h-10 rounded-lg px-2 text-sm font-semibold text-meta-dark underline underline-offset-4"
           >
             Quitar filtros

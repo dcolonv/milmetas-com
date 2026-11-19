@@ -51,14 +51,14 @@ The *Calculadora de metas*: a client component fed by pure functions in `src/lib
 
   | Field | Query key | Type | Default | Validation |
   |---|---|---|---|---|
-  | Nombre de la meta | `meta` | text, max 80 | "Leer 12 libros" | optional |
+  | Nombre de la meta | `meta` | text, max 120 | "Leer 12 libros" | optional |
   | Empiezo en | `de` | number | 0 | finite, absolute value up to 1e12: "Escribe un número." |
   | Quiero llegar a | `a` | number | 12 | finite, different from the start: "El valor al que quieres llegar tiene que ser distinto del valor inicial." |
   | Unidad | `u` | text, max 24 | "libros" | optional |
   | Desde | `desde` | date | today | valid date: "Elige una fecha de inicio." |
   | Hasta | `hasta` | date | today + 364 days | not before the start, span up to 36,500 days: "La fecha límite no puede ser anterior a la de inicio." |
   | Días por semana | `dps` | integer 1 to 7 | 7 | clamps to 1..7 |
-  | Hoy llevo | `llevo` | number | the start value | finite |
+  | Hoy llevo | `llevo` | number | the start value | finite, absolute value up to 1e12 |
 
   Links from the bank pass `dias` instead of dates: the plan then starts today and lasts `dias` days.
 - **Logic** (all dates are calendar days in the visitor's time zone; the plan includes both the start day and the deadline day):
@@ -75,7 +75,7 @@ The *Calculadora de metas*: a client component fed by pure functions in `src/lib
   - remaining `R` = max(T − H, 0); days left after today `L` = D − E; new pace = R / L per day (when L = 0, everything remaining is due today)
   - projection: average pace so far `v` = H / E; if v > 0, projected finish = desde + ceil(T / v) − 1 days; with no progress there is no projection
   - milestones at 25%, 50%, 75%, 100%: date = desde + ceil(k·D) − 1 days, value = de + s·k·T
-- **Outputs:** the verdict as a labelled badge with one sentence explaining it; a progress bar with a marker where the visitor should be today; four pace figures (día, semana, mes, sesión); "para hoy deberías llevar"; the difference in units and in days; the pace needed from tomorrow; the projected finish date; the milestone table; and an expandable "Cómo se calcula" that shows each formula with the visitor's own numbers. Numbers use Spanish formatting (decimal comma, at most two decimals).
+- **Outputs:** the verdict as a labelled badge with one sentence explaining it; a progress bar with a marker where the visitor should be today; four pace figures (día, semana, mes, sesión); "para hoy deberías llevar"; the difference in units and in days; the pace needed from tomorrow; the projected finish date; the milestone table; and an expandable "Cómo se calcula" that shows each formula with the visitor's own numbers. Numbers use Spanish formatting (decimal comma, two decimals, up to four for values under 1).
 - **Edge cases:** empty or non-numeric fields show the message beside the field and no result; start equal to target is an error; deadline before start is an error; a one-day plan (D = 1) is valid; today before the start shows the plan without a verdict on progress; today after the deadline shows "plazo vencido" with what is missing; progress beyond the target shows "cumplida" and the bar stays at 100%; progress in the wrong direction gives a negative H and "atrasado"; unknown or malformed query keys fall back to defaults.
 - **Worked examples to verify against** (computed by hand; they are unit tests and are published on the calculator page):
   1. **Leer 12 libros en 2027.** de 0, a 12, 2027-01-01 to 2027-12-31 → D = 365; per day 0.0329, per week 0.2301, per month 1.0007; one book every 30.42 days. Milestones: 3 books by 2027-04-02, 6 by 2027-07-02, 9 by 2027-10-01, 12 by 2027-12-31. Checked on 2027-04-10 with 3 books read: E = 100, expected 3.2877, Δ = −0.2877, tol = 0.6 → **a tiempo**; new pace 9 / 265 = 0.0340 per day (0.2377 per week); projection at 0.03 per day: 400 days → 2028-02-04.

@@ -10,7 +10,7 @@ const HORIZONTE: Record<string, string> = {
 /** One goal of the bank: the text, its pace, and the link that opens it in the calculator. */
 export function MetaFila({ meta, conArea = false }: { meta: MetaListada; conArea?: boolean }) {
   return (
-    <li className="flex flex-wrap items-center gap-x-4 gap-y-2 px-4 py-3.5 sm:px-5">
+    <li className={`flex flex-wrap items-center gap-x-4 gap-y-2 px-4 py-3.5 sm:px-5 ${conArea ? "fila-larga" : ""}`}>
       <div className="min-w-0 flex-1 basis-64">
         <p className="font-semibold leading-snug">{meta.texto}</p>
         <p className="mt-0.5 text-sm text-muted">
