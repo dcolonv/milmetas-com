@@ -53,10 +53,10 @@ Built from [SPEC.md](SPEC.md). Each milestone ends with the site building, a com
 - [x] Commit: monetization ready, switched off
 
 ## M5 · Trust and search
-- [ ] Acerca, Cómo trabajamos, Contacto, Privacidad, Términos, Afiliados
-- [ ] Per-page titles, descriptions and canonicals; sitemap, robots, RSS, JSON-LD, 404
-- [ ] Analytics component
-- [ ] Commit: trust pages and search plumbing
+- [x] Acerca, Cómo trabajamos, Contacto, Privacidad, Términos, Afiliados
+- [x] Per-page titles, descriptions and canonicals; sitemap, robots, RSS, JSON-LD, 404
+- [x] Analytics component
+- [x] Commit: trust pages and search plumbing
 
 ## M6 · Verify
 - [ ] `lint`, tests, `build` pass; route table has no unintended dynamic pages
