@@ -47,10 +47,10 @@ Built from [SPEC.md](SPEC.md). Each milestone ends with the site building, a com
 - [x] Commit: launch content
 
 ## M4 · Monetization plumbing
-- [ ] Affiliate registry and `AffiliateLink`; disclosure component on pages with links
-- [ ] `AdSlot` in the four agreed positions, rendering nothing while unconfigured; `ads.txt` route
-- [ ] `/publicidad`; sponsor slot; network links block and newsletter component, both off while unconfigured
-- [ ] Commit: monetization ready, switched off
+- [x] Affiliate registry and `AffiliateLink`; disclosure component on pages with links
+- [x] `AdSlot` in the four agreed positions, rendering nothing while unconfigured; `ads.txt` route
+- [x] `/publicidad`; sponsor slot; network links block and newsletter component, both off while unconfigured
+- [x] Commit: monetization ready, switched off
 
 ## M5 · Trust and search
 - [ ] Acerca, Cómo trabajamos, Contacto, Privacidad, Términos, Afiliados
