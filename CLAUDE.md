@@ -33,6 +33,7 @@ Read `docs/SPEC.md` for what the site is, `docs/PLAN.md` for build state and `do
 
 - Site copy is Spanish (neutral, "tú"); code comments and docs are English.
 - Next.js here runs with Cache Components: no `export const revalidate/dynamic/dynamicParams`. Dynamic routes list their params in `generateStaticParams` and call `notFound()` for anything else. The calculator reads the query string in the browser inside `<Suspense>`, so pages stay static.
+- Unknown slugs must return a real 404. A dynamic route under Cache Components answers them with 200 on the first visit, so `next.config.ts` rewrites every slug that is not in the data files to `/no-encontrada`. A new dynamic section needs its own rewrite there.
 - Colours and fonts are tokens in `src/app/globals.css` (`bg-paper`, `text-ink`, `text-meta`...). Do not use raw hex values in components.
 - The worked examples in `docs/SPEC.md` section 3 are tests in `src/lib/ritmo.test.ts`. If the maths changes, both change.
 

@@ -16,15 +16,26 @@ export type MetaListada = {
   href: string;
 };
 
+const PERIODOS: [nombre: string, dias: number][] = [
+  ["día", 1],
+  ["semana", 7],
+  ["mes", 30.4375],
+  ["año", 365.25],
+];
+
+/**
+ * The pace in the shortest period where it reaches at least one unit:
+ * "20 páginas por día", "3 sesiones por semana", "1 libro por mes", "2 países por año".
+ */
+export function ritmoLegible(total: number, dias: number, unidad: string): string {
+  const porDia = total / dias;
+  const [nombre, periodo] = PERIODOS.find(([, d]) => porDia * d >= 1) ?? PERIODOS[PERIODOS.length - 1];
+  return `${conUnidad(Math.min(porDia * periodo, total), unidad)} por ${nombre}`;
+}
+
 export function listarMeta(m: Meta): MetaListada {
   const area = areaPorSlug.get(m.area)!;
-  const total = Math.abs(m.cantidad - m.desde);
-  const porDia = total / m.dias;
-  // Short plans read better per day; anything longer, per week or per month.
-  let ritmo: string;
-  if (m.dias < 14) ritmo = `${conUnidad(porDia, m.unidad)} por día`;
-  else if (porDia * 7 >= 1 || m.dias <= 92) ritmo = `${conUnidad(Math.min(porDia * 7, total), m.unidad)} por semana`;
-  else ritmo = `${conUnidad(Math.min(porDia * 30.4375, total), m.unidad)} por mes`;
+  const ritmo = ritmoLegible(Math.abs(m.cantidad - m.desde), m.dias, m.unidad);
 
   return {
     id: m.id,

@@ -67,13 +67,13 @@ Built from [SPEC.md](SPEC.md). Each milestone ends with the site building, a com
 - [x] Commit and push: ready to deploy
 
 ## M7 · Publish
-- [ ] Vercel project created and linked; repository connected
-- [ ] Production deployment succeeded
-- [ ] `site_check.py` against the production alias: no errors
-- [ ] Domain and `www` attached; DNS records obtained
-- [ ] Web Analytics enabled
+- [x] Vercel project created and linked; repository connected
+- [x] Production deployment succeeded
+- [x] `site_check.py` against the production alias: no errors
+- [x] Domain and `www` attached; DNS records obtained
+- [x] Web Analytics enabled
 
 ## M8 · Hand off
-- [ ] `docs/MONETIZATION.md`
-- [ ] `docs/LAUNCH.md` with live URL, DNS records, what to do next, content roadmap
-- [ ] Final commit pushed; Git-triggered deployment confirmed
+- [x] `docs/MONETIZATION.md`
+- [x] `docs/LAUNCH.md` with live URL, DNS records, what to do next, content roadmap
+- [x] Final commit pushed; Git-triggered deployment confirmed

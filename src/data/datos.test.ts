@@ -7,6 +7,7 @@ import { guiaPorSlug, guias } from "./guias";
 import { horizonteDe, metas, metasDeArea } from "./metas";
 import { presets } from "./presets";
 import { MAX_NOMBRE } from "../lib/enlace";
+import { ritmoLegible } from "../lib/banco";
 import { cargadores } from "../lib/guias";
 
 const tituloOk = (t: string) => t.length > 10 && t.length <= 58;
@@ -56,6 +57,18 @@ describe("bank of goals", () => {
   it("stays away from weight, diet and investment goals", () => {
     const vetado = /\b(kilos?|kg|peso|adelgazar|dieta|calor[ií]as|invertir|inversi[oó]n|acciones|cripto|rentabilidad)\b/i;
     for (const m of metas) expect(vetado.test(m.texto), m.texto).toBe(false);
+  });
+});
+
+describe("pace shown next to each goal", () => {
+  it("uses the shortest period where the pace reaches one unit", () => {
+    expect(ritmoLegible(600, 30, "páginas")).toBe("20\u00a0páginas por día");
+    expect(ritmoLegible(12, 28, "sesiones")).toBe("3\u00a0sesiones por semana");
+    expect(ritmoLegible(3, 90, "libros")).toBe("1,01\u00a0libros por mes");
+    expect(ritmoLegible(10, 1826, "países")).toBe("2\u00a0países por año");
+    expect(ritmoLegible(2, 60, "comidas")).toBe("1,01\u00a0comidas por mes");
+    expect(ritmoLegible(5, 1826, "viajes")).toBe("1\u00a0viajes por año");
+    expect(ritmoLegible(300, 30, "")).toBe("10 por día");
   });
 });
 
