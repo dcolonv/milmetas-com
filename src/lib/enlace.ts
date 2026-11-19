@@ -9,7 +9,7 @@ import { esFechaValida, sumarDias, type FechaISO } from "./fechas";
 import { leerNumero, numeroParaCampo } from "./formato";
 import { MAX_DIAS, limitarDiasPorSemana, validarPlan, type EntradaPlan, type ErrorPlan } from "./ritmo";
 
-export const MAX_NOMBRE = 80;
+export const MAX_NOMBRE = 120;
 export const MAX_UNIDAD = 24;
 
 /** Everything is kept as the text the visitor typed. */

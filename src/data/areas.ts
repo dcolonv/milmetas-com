@@ -111,7 +111,7 @@ export const areas: Area[] = [
     titulo: "Metas académicas: 20 ejemplos para estudiantes",
     tituloSeo: "Metas académicas: 20 ejemplos para estudiantes",
     descripcion:
-      "Ejemplos de metas académicas medibles: horas de estudio, temas repasados, ejercicios resueltos y entregas adelantadas. Para instituto, universidad y oposiciones.",
+      "Ejemplos de metas académicas medibles: horas de estudio, temas repasados, ejercicios resueltos y entregas a tiempo. Para instituto, universidad y oposiciones.",
     resumen: "Horas de estudio, temas, ejercicios y entregas, con un ritmo semanal claro.",
     intro: [
       "La nota no la controlas del todo; las horas, los temas y los ejercicios, sí. Una buena meta académica cuenta el trabajo que lleva al resultado: «resolver 300 problemas antes del examen» te dice qué hacer hoy, mientras que «sacar un 8» solo te dice qué esperar.",
@@ -231,7 +231,7 @@ export const areas: Area[] = [
     titulo: "Metas de relaciones, familia y amistad: 20 ejemplos",
     tituloSeo: "Metas de relaciones, familia y amistad: 20 ejemplos",
     descripcion:
-      "Ejemplos de metas para cuidar a tu pareja, tu familia y tus amistades: llamadas, comidas, planes y tiempo sin pantallas, contados para que no se queden en intención.",
+      "Ejemplos de metas para cuidar a tu pareja, tu familia y tus amistades: llamadas, comidas, planes y tiempo sin pantallas, con cifra y plazo.",
     resumen: "Tiempo con la gente que te importa, puesto en el calendario.",
     intro: [
       "Las relaciones no se miden, pero el tiempo que les dedicas sí. Nadie cuida una amistad «al 80 %»; lo que puedes contar es cuántas veces llamaste, comiste con alguien o apagaste el móvil durante la cena. Una meta en esta área es una forma de reservar ese tiempo antes de que lo ocupe todo lo demás.",
@@ -291,7 +291,7 @@ export const areas: Area[] = [
     titulo: "Metas creativas y de proyectos personales: 20 ejemplos",
     tituloSeo: "Metas creativas y de proyectos personales: 20 ejemplos",
     descripcion:
-      "Ejemplos de metas para escribir, dibujar, tocar un instrumento, programar o sacar adelante un proyecto propio: palabras, piezas, horas y publicaciones con plazo.",
+      "Ejemplos de metas para escribir, dibujar, tocar un instrumento, programar o avanzar un proyecto propio: palabras, piezas, horas y publicaciones con plazo.",
     resumen: "Escribir, dibujar, tocar, programar: cantidad primero, calidad como consecuencia.",
     intro: [
       "En el trabajo creativo la calidad no se puede planificar, pero la cantidad sí, y la segunda suele traer la primera. Por eso estas metas cuentan producción: palabras escritas, dibujos terminados, horas de práctica, piezas publicadas. Son cifras que puedes cumplir incluso en un mal día, y que con los meses se convierten en oficio.",

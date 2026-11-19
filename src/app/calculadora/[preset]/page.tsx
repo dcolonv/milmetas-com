@@ -8,6 +8,11 @@ import { guiaPorSlug } from "@/data/guias";
 import { presetPorSlug, presets } from "@/data/presets";
 import { pageMeta } from "@/lib/seo";
 
+// Every valid slug is prerendered from generateStaticParams. Anything else has
+// to wait for the server so it can answer with a real 404, so this route is
+// deliberately not validated for instant navigation.
+export const instant = false;
+
 export function generateStaticParams() {
   return presets.map((p) => ({ preset: p.slug }));
 }

@@ -131,7 +131,7 @@ describe("the plan in the query string", () => {
 
   it("cuts overlong names and units", () => {
     const estado = estadoInicial(lector(`meta=${"x".repeat(200)}&u=${"y".repeat(60)}`), "2027-01-01", pre);
-    expect(estado.meta).toHaveLength(80);
+    expect(estado.meta).toHaveLength(120);
     expect(estado.u).toHaveLength(24);
   });
 

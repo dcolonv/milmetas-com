@@ -27,24 +27,24 @@ Built from [SPEC.md](SPEC.md). Each milestone ends with the site building, a com
 - [x] Commit: calculator works
 
 ## M3 · Content
-- [ ] Bank data: 10 areas, 200 goals (`src/data/areas.ts`, `src/data/metas.ts`) with integrity tests
-- [ ] `/metas` with filters by area, horizon and text; `/metas/[area]` pages with introductions
-- [ ] MDX loading, guide template, `/guias` hub
-- [ ] Guía: Cómo escribir una meta SMART
-- [ ] Guía: Metas a corto, mediano y largo plazo
-- [ ] Guía: Metas y hábitos
-- [ ] Guía: Qué dice la investigación sobre fijar metas
-- [ ] Guía: Propósitos de año nuevo
-- [ ] Guía: Cómo saber si vas a tiempo con una meta
-- [ ] Guía: Metas financieras
-- [ ] Guía: Metas académicas
-- [ ] Guía: Metas laborales para tu evaluación de desempeño
-- [ ] Guía: Reto de lectura, páginas por día
-- [ ] Guía: Método WOOP y planes «si-entonces»
-- [ ] Guía: OKR personales
-- [ ] Home page: calculator entry, areas with counts, latest guides
-- [ ] Internal links between guides, areas and the calculator
-- [ ] Commit: launch content
+- [x] Bank data: 10 areas, 200 goals (`src/data/areas.ts`, `src/data/metas.ts`) with integrity tests
+- [x] `/metas` with filters by area, horizon and text; `/metas/[area]` pages with introductions
+- [x] MDX loading, guide template, `/guias` hub
+- [x] Guía: Cómo escribir una meta SMART
+- [x] Guía: Metas a corto, mediano y largo plazo
+- [x] Guía: Metas y hábitos
+- [x] Guía: Qué dice la investigación sobre fijar metas
+- [x] Guía: Propósitos de año nuevo
+- [x] Guía: Cómo saber si vas a tiempo con una meta
+- [x] Guía: Metas financieras
+- [x] Guía: Metas académicas
+- [x] Guía: Metas laborales para tu evaluación de desempeño
+- [x] Guía: Reto de lectura, páginas por día
+- [x] Guía: Método WOOP y planes «si-entonces»
+- [x] Guía: OKR personales
+- [x] Home page: calculator entry, areas with counts, latest guides
+- [x] Internal links between guides, areas and the calculator
+- [x] Commit: launch content
 
 ## M4 · Monetization plumbing
 - [ ] Affiliate registry and `AffiliateLink`; disclosure component on pages with links
