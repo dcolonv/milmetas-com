@@ -9,10 +9,16 @@ import { presets } from "./src/data/presets";
  *
  * With Cache Components, a dynamic route answers an unknown slug with the
  * prerendered shell and status 200 before the page gets to call notFound()
- * (a soft 404 on the first visit). Sending unknown slugs straight to the
- * not-found page at the routing layer gives a real 404 every time, with no
+ * (a soft 404 on the first visit). Sending unknown slugs to a path that does
+ * not exist, at the routing layer, gives a real 404 every time with no
  * function running. The lists come from the same data files the pages use.
+ *
+ * The destination must not be "/_not-found": Vercel serves that prerendered
+ * page with status 200. "/404" is not a route in this app, so both
+ * `next start` and Vercel answer it with the not-found page and status 404.
  */
+const NO_ENCONTRADA = "/404";
+
 const desconocido = (slugs: string[]) => `((?!(?:${slugs.join("|")})$)[^/]+)`;
 
 const nextConfig: NextConfig = {
@@ -29,9 +35,9 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return {
       beforeFiles: [
-        { source: `/guias/:slug${desconocido(guias.map((g) => g.slug))}`, destination: "/_not-found" },
-        { source: `/metas/:area${desconocido(areas.map((a) => a.slug))}`, destination: "/_not-found" },
-        { source: `/calculadora/:preset${desconocido(presets.map((p) => p.slug))}`, destination: "/_not-found" },
+        { source: `/guias/:slug${desconocido(guias.map((g) => g.slug))}`, destination: NO_ENCONTRADA },
+        { source: `/metas/:area${desconocido(areas.map((a) => a.slug))}`, destination: NO_ENCONTRADA },
+        { source: `/calculadora/:preset${desconocido(presets.map((p) => p.slug))}`, destination: NO_ENCONTRADA },
       ],
       afterFiles: [],
       fallback: [],
