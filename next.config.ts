@@ -13,11 +13,11 @@ import { presets } from "./src/data/presets";
  * not exist, at the routing layer, gives a real 404 every time with no
  * function running. The lists come from the same data files the pages use.
  *
- * The destination must not be "/_not-found": Vercel serves that prerendered
- * page with status 200. "/404" is not a route in this app, so both
- * `next start` and Vercel answer it with the not-found page and status 404.
+ * The destination is a page that only calls notFound(), so its prerendered
+ * status is 404 and Vercel keeps it. Rewriting to "/_not-found" or "/404"
+ * works under `next start` but answers 200 on Vercel.
  */
-const NO_ENCONTRADA = "/404";
+const NO_ENCONTRADA = "/no-encontrada";
 
 const desconocido = (slugs: string[]) => `((?!(?:${slugs.join("|")})$)[^/]+)`;
 
