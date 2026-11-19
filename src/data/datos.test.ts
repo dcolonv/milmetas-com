@@ -67,7 +67,8 @@ describe("pace shown next to each goal", () => {
     expect(ritmoLegible(3, 90, "libros")).toBe("1,01\u00a0libros por mes");
     expect(ritmoLegible(10, 1826, "países")).toBe("2\u00a0países por año");
     expect(ritmoLegible(2, 60, "comidas")).toBe("1,01\u00a0comidas por mes");
-    expect(ritmoLegible(5, 1826, "viajes")).toBe("1\u00a0viajes por año");
+    expect(ritmoLegible(5, 1826, "viajes")).toBe("1 por año");
+    expect(ritmoLegible(12, 365, "libros")).toBe("1 por mes");
     expect(ritmoLegible(300, 30, "")).toBe("10 por día");
   });
 });

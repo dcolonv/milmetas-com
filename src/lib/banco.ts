@@ -3,7 +3,7 @@
 import { areaPorSlug } from "@/data/areas";
 import type { Horizonte, Meta } from "@/data/metas";
 import { enlaceCalculadora } from "./enlace";
-import { conUnidad } from "./formato";
+import { conUnidad, formatearNumero } from "./formato";
 
 export type MetaListada = {
   id: string;
@@ -25,12 +25,15 @@ const PERIODOS: [nombre: string, dias: number][] = [
 
 /**
  * The pace in the shortest period where it reaches at least one unit:
- * "20 páginas por día", "3 sesiones por semana", "1 libro por mes", "2 países por año".
+ * "20 páginas por día", "3 sesiones por semana", "1 por mes", "2 países por año".
  */
 export function ritmoLegible(total: number, dias: number, unidad: string): string {
   const porDia = total / dias;
   const [nombre, periodo] = PERIODOS.find(([, d]) => porDia * d >= 1) ?? PERIODOS[PERIODOS.length - 1];
-  return `${conUnidad(Math.min(porDia * periodo, total), unidad)} por ${nombre}`;
+  const valor = Math.min(porDia * periodo, total);
+  // The unit is free text and cannot be made singular, so "1 libros" is avoided by leaving it out.
+  if (formatearNumero(valor) === "1") return `1 por ${nombre}`;
+  return `${conUnidad(valor, unidad)} por ${nombre}`;
 }
 
 export function listarMeta(m: Meta): MetaListada {
