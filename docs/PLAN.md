@@ -3,28 +3,28 @@
 Built from [SPEC.md](SPEC.md). Each milestone ends with the site building, a commit, and a push. Tick items as they are finished; this file is how an interrupted run knows where to pick up.
 
 ## M0 · Scaffold
-- [ ] Scaffold with `npx create-next-app@latest` into the repository; untouched scaffold builds
-- [ ] Install the companion skills (`install_skills.py`); `skills-lock.json` present
-- [ ] Read the bundled framework docs listed in the build guide, then the React companion skills
-- [ ] `agent-browser` CLI available; `next dev` running and `next-dev-loop` preflight passes
-- [ ] `src/site.config.ts` with name, `https://milmetas.com`, language `es`, nav, empty monetization IDs
-- [ ] Remove scaffold leftovers; `CLAUDE.md` with project conventions
-- [ ] Commit: scaffold
+- [x] Scaffold with `npx create-next-app@latest` into the repository; untouched scaffold builds
+- [x] Install the companion skills (`install_skills.py`); `skills-lock.json` present
+- [x] Read the bundled framework docs listed in the build guide, then the React companion skills
+- [x] `agent-browser` CLI available; `next dev` running and `next-dev-loop` preflight passes
+- [x] `src/site.config.ts` with name, `https://milmetas.com`, language `es`, nav, empty monetization IDs
+- [x] Remove scaffold leftovers; `CLAUDE.md` with project conventions
+- [x] Commit: scaffold
 
 ## M1 · Identity and layout
-- [ ] Theme tokens (paper, ink, meta accent, status colours), Bricolage Grotesque and Source Sans 3 through `next/font`
-- [ ] Header with wordmark and nav, footer with the four link groups, page container, breadcrumbs, prose styles for guides
-- [ ] Favicon, app icon, Open Graph image
-- [ ] Commit: layout and identity
+- [x] Theme tokens (paper, ink, meta accent, status colours), Bricolage Grotesque and Source Sans 3 through `next/font`
+- [x] Header with wordmark and nav, footer with the four link groups, page container, breadcrumbs, prose styles for guides
+- [x] Favicon, app icon, Open Graph image
+- [x] Commit: layout and identity
 
 ## M2 · Core feature: Calculadora de metas
-- [ ] `src/lib/fechas.ts` and `src/lib/ritmo.ts` with Vitest tests covering the four worked examples and the edge cases in the spec
-- [ ] Calculator UI: form, verdict, progress bar with today's marker, pace figures, milestones, "Cómo se calcula"
-- [ ] State in the query string; "Mis metas" saved in the browser; copy link
-- [ ] `/calculadora` page: how it works, the worked examples, FAQ, JSON-LD
-- [ ] Preset pages: `/calculadora/ahorro`, `/calculadora/lectura`, `/calculadora/estudio`, `/calculadora/kilometros`
-- [ ] Verified in the running app with `next-dev-loop`, and by hand against worked example 2
-- [ ] Commit: calculator works
+- [x] `src/lib/fechas.ts` and `src/lib/ritmo.ts` with Vitest tests covering the four worked examples and the edge cases in the spec
+- [x] Calculator UI: form, verdict, progress bar with today's marker, pace figures, milestones, "Cómo se calcula"
+- [x] State in the query string; "Mis metas" saved in the browser; copy link
+- [x] `/calculadora` page: how it works, the worked examples, FAQ, JSON-LD
+- [x] Preset pages: `/calculadora/ahorro`, `/calculadora/lectura`, `/calculadora/estudio`, `/calculadora/kilometros`
+- [x] Verified in the running app with `next-dev-loop`, and by hand against worked example 2
+- [x] Commit: calculator works
 
 ## M3 · Content
 - [ ] Bank data: 10 areas, 200 goals (`src/data/areas.ts`, `src/data/metas.ts`) with integrity tests

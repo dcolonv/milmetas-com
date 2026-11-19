@@ -1,0 +1,55 @@
+import type { Metadata } from "next";
+import { absoluteUrl, site } from "@/site.config";
+
+type PageMeta = {
+  /** Without the site name; the layout's template adds it. Keep it under 58 characters. */
+  title: string;
+  /** 50 to 160 characters, unique to the page. */
+  description: string;
+  /** The page's own path, starting with "/". */
+  path: string;
+  type?: "website" | "article";
+  publishedTime?: string;
+  modifiedTime?: string;
+  /** Use the title exactly as given, with no " | Mil Metas" suffix. */
+  absoluteTitle?: boolean;
+};
+
+/**
+ * Title, description, canonical and Open Graph for one page. Every page calls
+ * this with its own path: the canonical is never inherited from a layout.
+ */
+export function pageMeta(p: PageMeta): Metadata {
+  const url = absoluteUrl(p.path);
+  return {
+    title: p.absoluteTitle ? { absolute: p.title } : p.title,
+    description: p.description,
+    alternates: {
+      canonical: url,
+      types: { "application/rss+xml": [{ url: "/feed.xml", title: `${site.name}: guías` }] },
+    },
+    openGraph: {
+      type: p.type ?? "website",
+      url,
+      title: p.title,
+      description: p.description,
+      siteName: site.name,
+      locale: site.ogLocale,
+      ...(p.type === "article" && p.publishedTime
+        ? { publishedTime: p.publishedTime, modifiedTime: p.modifiedTime ?? p.publishedTime }
+        : {}),
+    },
+    twitter: { card: "summary_large_image", title: p.title, description: p.description },
+  };
+}
+
+/** The publisher as schema.org sees it. No person or company is invented when none is configured. */
+export function organizationLd() {
+  return {
+    "@type": "Organization",
+    "@id": `${site.url}/#organizacion`,
+    name: site.publisherName || site.name,
+    url: site.url,
+    logo: absoluteUrl("/icon.svg"),
+  };
+}

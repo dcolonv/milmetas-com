@@ -1,0 +1,213 @@
+@import "tailwindcss";
+
+/*
+ * Mil Metas: a running track on warm paper.
+ * Every colour and typeface is a token here; components use the utilities
+ * (bg-paper, text-ink, text-meta, font-display...) and never raw values.
+ */
+@theme inline {
+  --color-paper: #fbf7f0;
+  --color-surface: #ffffff;
+  --color-line: #e7dfd2;
+  --color-line-strong: #cfc4b1;
+  --color-ink: #1b2032;
+  --color-muted: #5b6072;
+  --color-meta: #c2410c;
+  --color-meta-dark: #9a3412;
+  --color-meta-soft: #ffedd5;
+  --color-ok: #166534;
+  --color-ok-soft: #dcfce7;
+  --color-late: #991b1b;
+  --color-late-soft: #fee2e2;
+  --color-wait: #92400e;
+  --color-wait-soft: #fef3c7;
+
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  color-scheme: light;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-meta);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--color-meta-soft);
+}
+
+/* Anchored headings must not hide under the sticky header. */
+[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+/* The finish line: the one decorative motif of the site. */
+.franja-meta {
+  height: 12px;
+  background-color: var(--color-surface);
+  background-image:
+    linear-gradient(45deg, var(--color-ink) 25%, transparent 25%, transparent 75%, var(--color-ink) 75%),
+    linear-gradient(45deg, var(--color-ink) 25%, transparent 25%, transparent 75%, var(--color-ink) 75%);
+  background-size: 12px 12px;
+  background-position:
+    0 0,
+    6px 6px;
+}
+
+/* Lane lines behind the hero. */
+.carriles {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 47px,
+    var(--color-line) 47px,
+    var(--color-line) 48px
+  );
+}
+
+.enlace {
+  color: var(--color-meta);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.enlace:hover {
+  color: var(--color-meta-dark);
+  text-decoration-thickness: 2px;
+}
+
+.cifra {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Long-form text: guides, trust pages and the explanations under the tool. */
+.prosa {
+  max-width: 44rem;
+}
+.prosa > * + * {
+  margin-top: 1.1em;
+}
+.prosa h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-top: 2.2em;
+}
+.prosa h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 1.8em;
+}
+.prosa p,
+.prosa li {
+  text-wrap: pretty;
+}
+.prosa a:not(.boton) {
+  color: var(--color-meta);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+.prosa a:not(.boton):hover {
+  color: var(--color-meta-dark);
+  text-decoration-thickness: 2px;
+}
+.prosa ul,
+.prosa ol {
+  padding-left: 1.4em;
+}
+.prosa ul {
+  list-style: disc;
+}
+.prosa ol {
+  list-style: decimal;
+}
+.prosa li + li {
+  margin-top: 0.4em;
+}
+.prosa li::marker {
+  color: var(--color-meta);
+}
+.prosa strong {
+  font-weight: 700;
+}
+.prosa blockquote {
+  border-left: 4px solid var(--color-meta);
+  padding: 0.2em 0 0.2em 1em;
+  color: var(--color-muted);
+}
+.prosa code {
+  background: var(--color-meta-soft);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+  font-size: 0.92em;
+}
+.prosa hr {
+  border: 0;
+  border-top: 1px solid var(--color-line);
+  margin: 2em 0;
+}
+.prosa .tabla {
+  overflow-x: auto;
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  background: var(--color-surface);
+}
+.prosa table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.97rem;
+}
+.prosa th,
+.prosa td {
+  text-align: left;
+  padding: 0.6em 0.9em;
+  border-bottom: 1px solid var(--color-line);
+  vertical-align: top;
+}
+.prosa th {
+  font-family: var(--font-display);
+  font-weight: 700;
+  background: var(--color-paper);
+}
+.prosa tr:last-child td {
+  border-bottom: 0;
+}
