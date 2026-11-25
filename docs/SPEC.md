@@ -31,7 +31,7 @@ Every URL the site launches with.
 | `/guias/[slug]` (12) | Guía | One article | static |
 | `/acerca` `/como-trabajamos` `/contacto` `/privacidad` `/terminos` `/afiliados` | Trust pages | About, editorial policy, contact, privacy, terms, affiliate disclosure | static |
 | `/publicidad` | Patrocinio | Who the audience is, what placements exist, how to get in touch | static |
-| `/sitemap.xml` `/robots.txt` `/feed.xml` `/ads.txt` | Machine-readable | `ads.txt` returns 404 until an AdSense client is set | generated |
+| `/sitemap.xml` `/robots.txt` `/llms.txt` `/feed.xml` `/ads.txt` | Machine-readable | `ads.txt` returns 404 until an AdSense client is set; `llms.txt` and the sitemap come from one list | generated |
 
 Areas (`/metas/[area]`): `salud-y-bienestar`, `dinero`, `estudios`, `trabajo`, `lectura`, `idiomas`, `relaciones`, `hogar`, `creatividad`, `viajes-y-experiencias`.
 
@@ -104,8 +104,8 @@ The *Calculadora de metas*: a client component fed by pure functions in `src/lib
 | 4 | Qué dice la investigación sobre fijar metas (y el estudio de Yale que nunca existió) | `/guias/que-dice-la-investigacion-sobre-fijar-metas` | Does writing goals down work, and what is the evidence? | calculadora, guías 1, 3 and 11 | none |
 | 5 | Propósitos de año nuevo: cómo elegir pocos y convertirlos en un plan | `/guias/propositos-de-ano-nuevo` | How do I make resolutions I will still be doing in March? | calculadora, banco, guías 1 and 6 | planners (search link) |
 | 6 | Cómo saber si vas a tiempo con una meta: ritmo, hitos y revisión semanal | `/guias/como-saber-si-vas-a-tiempo` | How do I check progress and what do I do when I am behind? | calculadora, guías 2 and 3 | none |
-| 7 | Metas financieras: ejemplos y cómo calcular cuánto apartar | `/guias/metas-financieras` | What is a reasonable money goal and how much per month does it take? | calculadora de ahorro, área dinero, guía 2 | none |
-| 8 | Metas académicas: ejemplos medibles para estudiantes | `/guias/metas-academicas` | What goals can a student set that are measurable? | calculadora de estudio, área estudios, guía 1 | none |
+| 7 | Metas financieras: cómo fijarlas, por dónde empezar y cuánto apartar | `/guias/metas-financieras` | What is a reasonable money goal and how much per month does it take? | calculadora de ahorro, área dinero, guía 2 | none |
+| 8 | Metas académicas: cómo fijarlas y repartir el temario hasta el examen | `/guias/metas-academicas` | What goals can a student set that are measurable? | calculadora de estudio, área estudios, guía 1 | none |
 | 9 | Metas laborales para tu evaluación de desempeño: ejemplos medibles | `/guias/metas-laborales-evaluacion-de-desempeno` | What do I write when my manager asks for goals? | calculadora, área trabajo, guías 1 and 12 | none |
 | 10 | Reto de lectura: cuántas páginas al día para leer más libros al año | `/guias/reto-de-lectura-paginas-por-dia` | How many pages a day do I need for N books a year? | calculadora de lectura, área lectura, guía 3 | e-readers (category link) |
 | 11 | Método WOOP y planes «si-entonces»: prepara el obstáculo antes de que llegue | `/guias/metodo-woop-y-planes-si-entonces` | How do I plan for the moment I will want to quit? | calculadora, guías 3 and 4 | none |
@@ -124,7 +124,7 @@ The *Calculadora de metas*: a client component fed by pure functions in `src/lib
   - Calculator and presets: "calculadora de metas", "cuánto ahorrar al mes para llegar a una meta", "cuántas páginas leer al día", "cuántas horas estudiar al día", "cuántos km correr por semana meta anual"
   - Bank and areas: "ejemplos de metas personales", "lista de metas", "metas financieras ejemplos", "metas académicas ejemplos", "metas laborales ejemplos", "metas de salud ejemplos", "metas a corto plazo ejemplos"
   - Guides: "metas SMART ejemplos", "qué es una meta SMART", "metas a corto mediano y largo plazo", "diferencia entre meta y hábito", "propósitos de año nuevo", "método WOOP", "OKR personales", "reto de lectura"
-- **Structured data by page type:** `WebSite` and `Organization` on the home page; `WebApplication` plus `FAQPage` (the questions are visible) on the calculator pages; `ItemList` on the bank and area pages; `Article` on guides; `BreadcrumbList` on every page below the home page.
+- **Structured data by page type:** `WebSite`, `Organization` and `FAQPage` (questions about the site, visible) on the home page; `WebApplication` plus `FAQPage` (the questions are visible) on the calculator pages; `ItemList` on the bank and area pages; `Article` on guides; `BreadcrumbList` on every page below the home page.
 - **Redirects from the domain's old URLs:** none. The domain only ever served parking pages.
 
 ## 7. Monetization
