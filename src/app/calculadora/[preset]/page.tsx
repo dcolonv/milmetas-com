@@ -45,6 +45,7 @@ export default async function Page({ params }: PageProps<"/calculadora/[preset]"
       descripcion={p.descripcion}
       pre={p.pre}
       preguntas={p.faq}
+      actualizado={p.actualizado}
     >
       {p.secciones.map((s) => (
         <section key={s.titulo} className="prosa">

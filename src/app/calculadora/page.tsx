@@ -4,7 +4,7 @@ import { EjemploResuelto } from "@/components/calculadora/EjemploResuelto";
 import { PaginaCalculadora } from "@/components/calculadora/PaginaCalculadora";
 import type { Pregunta } from "@/components/Faq";
 import { ejemplos } from "@/data/ejemplos";
-import { predeterminados } from "@/data/presets";
+import { calculadoraActualizada, predeterminados } from "@/data/presets";
 import { pageMeta } from "@/lib/seo";
 
 const RUTA = "/calculadora";
@@ -61,6 +61,7 @@ export default function Page() {
       descripcion={DESCRIPCION}
       pre={predeterminados}
       preguntas={preguntas}
+      actualizado={calculadoraActualizada}
     >
       <section aria-labelledby="como-usarla" className="prosa">
         <h2 id="como-usarla">Cómo usarla</h2>

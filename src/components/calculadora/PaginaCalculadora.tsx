@@ -5,16 +5,18 @@ import { Breadcrumbs, type Miga } from "@/components/Breadcrumbs";
 import { Faq, type Pregunta } from "@/components/Faq";
 import { JsonLd } from "@/components/JsonLd";
 import { SponsorSlot } from "@/components/SponsorSlot";
-import { Contenedor, Encabezado } from "@/components/ui";
+import { Actualizado, Contenedor, Encabezado } from "@/components/ui";
 import { presets } from "@/data/presets";
 import type { Predeterminados } from "@/lib/enlace";
+import { formatearFecha } from "@/lib/fechas";
+import { organizationLd } from "@/lib/seo";
 import { absoluteUrl, site } from "@/site.config";
 import { CalculadoraDeMetas } from "./index";
 
 /**
  * The frame shared by the main calculator and the calculators by kind of goal:
  * heading, the tool, the ad and sponsor slots, the page's own sections, the
- * questions, and the links between calculators.
+ * questions, the date of the last change, and the links between calculators.
  */
 export function PaginaCalculadora({
   ruta,
@@ -24,6 +26,7 @@ export function PaginaCalculadora({
   descripcion,
   pre,
   preguntas,
+  actualizado,
   children,
 }: {
   ruta: string;
@@ -33,6 +36,8 @@ export function PaginaCalculadora({
   descripcion: string;
   pre: Predeterminados;
   preguntas: Pregunta[];
+  /** Date of the page's last real change, "YYYY-MM-DD". Shown on the page and sent as dateModified. */
+  actualizado: string;
   children: ReactNode;
 }) {
   const otras = [
@@ -57,6 +62,7 @@ export function PaginaCalculadora({
         <div className="space-y-12">
           {children}
           <Faq preguntas={preguntas} />
+          <Actualizado fecha={actualizado} texto={formatearFecha(actualizado)} />
         </div>
         <aside aria-labelledby="otras-calculadoras" className="h-fit rounded-2xl border border-line bg-surface p-5">
           <h2 id="otras-calculadoras" className="text-lg font-bold">
@@ -93,10 +99,12 @@ export function PaginaCalculadora({
           description: descripcion,
           applicationCategory: "UtilitiesApplication",
           operatingSystem: "Cualquiera (navegador web)",
+          browserRequirements: "Requiere JavaScript",
           inLanguage: site.lang,
           isAccessibleForFree: true,
           offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
-          publisher: { "@id": `${site.url}/#organizacion` },
+          dateModified: actualizado,
+          publisher: organizationLd(),
         }}
       />
     </Contenedor>

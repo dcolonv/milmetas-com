@@ -91,7 +91,10 @@ function Cifra({
       <dt className="text-sm font-semibold text-muted">{titulo}</dt>
       <dd className="mt-0.5 [overflow-wrap:anywhere]">
         <span className="cifra text-2xl font-extrabold text-ink sm:text-[1.7rem]">{formatearNumero(valor)}</span>
-        {unidad ? <span className="ml-1.5 break-words text-sm text-muted">{unidad}</span> : null}
+        {/* The unit is free text and cannot be made singular, so "1 libros" is avoided by leaving it out. */}
+        {unidad && formatearNumero(valor) !== "1" ? (
+          <span className="ml-1.5 break-words text-sm text-muted">{unidad}</span>
+        ) : null}
         {nota ? <span className="block text-xs text-muted">{nota}</span> : null}
       </dd>
     </div>
@@ -708,11 +711,11 @@ function Formulario({ hoy, pre, inicial }: { hoy: string; pre: Predeterminados; 
 /**
  * The Calculadora de metas. It reads the plan from the query string and the
  * date from the visitor's clock, so it only renders in the browser; the
- * server sends the skeleton and the explanations around it.
+ * server sends the example plan (Esqueleto) and the explanations around it.
  */
 export function Calculadora({ pre }: { pre: Predeterminados }) {
   const params = useSearchParams();
   const hoy = useSyncExternalStore(sinSuscripcion, hoyCliente, hoyServidor);
-  if (!hoy) return <Esqueleto />;
+  if (!hoy) return <Esqueleto pre={pre} />;
   return <Formulario hoy={hoy} pre={pre} inicial={estadoInicial(params, hoy, pre)} />;
 }
