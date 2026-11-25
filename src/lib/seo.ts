@@ -54,7 +54,12 @@ export function pageMeta(p: PageMeta): Metadata {
   };
 }
 
-/** The publisher as schema.org sees it. No person or company is invented when none is configured. */
+/**
+ * The publisher as schema.org sees it. No person or company is invented when
+ * none is configured. Pages that name the publisher embed this whole node, not
+ * a bare "@id" reference: the node is only defined on the home page, and a
+ * reader of one page's markup cannot be assumed to have fetched another.
+ */
 export function organizationLd() {
   return {
     "@type": "Organization",

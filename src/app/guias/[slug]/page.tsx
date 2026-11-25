@@ -10,7 +10,7 @@ import { BotonEnlace, Contenedor, Tarjeta } from "@/components/ui";
 import { guiaPorSlug, guias } from "@/data/guias";
 import { formatearFecha } from "@/lib/fechas";
 import { cargadores } from "@/lib/guias";
-import { pageMeta } from "@/lib/seo";
+import { organizationLd, pageMeta } from "@/lib/seo";
 import { absoluteUrl, site } from "@/site.config";
 
 // Every valid slug is prerendered from generateStaticParams. Anything else has
@@ -127,8 +127,9 @@ export default async function Page({ params }: PageProps<"/guias/[slug]">) {
           dateModified: g.actualizado,
           mainEntityOfPage: absoluteUrl(ruta),
           image: absoluteUrl("/opengraph-image"),
-          author: { "@type": "Organization", name: site.publisherName || site.name, url: absoluteUrl("/acerca") },
-          publisher: { "@type": "Organization", name: site.publisherName || site.name, url: site.url },
+          // The same node as on the home page, so author and publisher resolve to one entity.
+          author: organizationLd(),
+          publisher: organizationLd(),
         }}
       />
     </Contenedor>
