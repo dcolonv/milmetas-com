@@ -36,6 +36,13 @@
       "skillPath": "skills/seo-audit/SKILL.md",
       "computedHash": "537ccf84d4a257cb1b6a9a3643fe56738632989768e1823ffe206ad1c64cd68a"
     },
+    "seo-geo": {
+      "source": "ReScienceLab/opc-skills",
+      "commit": "28fb8c5f40077de27ccf4f1e52f262e9043a61ac",
+      "sourceType": "github",
+      "skillPath": "skills/seo-geo/SKILL.md",
+      "computedHash": "3a38d9449cb57e24e14de88045865c237e974b2ccb3ef8127fa84582f5a702c8"
+    },
     "vercel-composition-patterns": {
       "source": "vercel-labs/agent-skills",
       "commit": "1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62",
