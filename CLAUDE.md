@@ -39,4 +39,4 @@ Read `docs/SPEC.md` for what the site is, `docs/PLAN.md` for build state and `do
 
 ## Companion skills
 
-The project uses agent skills listed in `skills-lock.json` (React best practices, composition patterns, web design guidelines, next-dev-loop, agent-browser, ai-sdk). They live in `.claude/skills/`, which is not committed. On a fresh clone restore them with `npx skills experimental_install`.
+The project uses agent skills listed in `skills-lock.json` (React best practices, composition patterns, web design guidelines, next-dev-loop, agent-browser, ai-sdk, seo, seo-audit). They live in `.claude/skills/`, which is not committed. On a fresh clone restore them with `npx skills experimental_install`.
