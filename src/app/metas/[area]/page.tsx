@@ -10,6 +10,7 @@ import { Actualizado, BotonEnlace, Contenedor, Encabezado } from "@/components/u
 import { areaPorSlug, areas } from "@/data/areas";
 import { guiaPorSlug } from "@/data/guias";
 import { horizontes, metasDeArea } from "@/data/metas";
+import { presets } from "@/data/presets";
 import { listarMeta } from "@/lib/banco";
 import { formatearFecha } from "@/lib/fechas";
 import { pageMeta } from "@/lib/seo";
@@ -43,9 +44,17 @@ export default async function Page({ params }: PageProps<"/metas/[area]">) {
     return g ? [g] : [];
   });
 
+  // The answer first: how many examples, of which terms, and two of them. Built from the list, so it cannot drift.
+  const dePlazo = (h: string) => lista.filter((m) => m.horizonte === h);
+  const [cortas, medianas, largas] = [dePlazo("corto"), dePlazo("mediano"), dePlazo("largo")];
+  const entradilla = `Son ${lista.length} ejemplos de ${a.tema}, todos con cifra y plazo: ${cortas.length} a corto plazo, ${medianas.length} a mediano y ${largas.length} a largo. Dos de ellos: «${cortas[0].texto}» y «${largas[0].texto}».`;
+
+  const preset = presets.find((p) => `/calculadora/${p.slug}` === a.calculadora);
+  const nombreCalculadora = preset ? preset.nombre.toLowerCase() : "calculadora de metas";
+
   return (
     <Contenedor>
-      <Encabezado titulo={a.titulo}>
+      <Encabezado titulo={a.titulo} entradilla={entradilla}>
         <Breadcrumbs
           migas={[
             { nombre: "Banco de metas", ruta: "/metas" },
@@ -106,10 +115,11 @@ export default async function Page({ params }: PageProps<"/metas/[area]">) {
               ))}
             </ol>
             <p className="mt-5 max-w-2xl text-[0.98rem] text-muted">
-              Las cifras de estas metas son ejemplos para empezar. Cámbialas por las tuyas en la calculadora.
+              Las cifras de estas metas son ejemplos para empezar. Cámbialas por las tuyas, o escribe una meta
+              distinta, en la {nombreCalculadora}.
             </p>
             <div className="mt-4">
-              <BotonEnlace href={a.calculadora}>Planificar mi propia meta</BotonEnlace>
+              <BotonEnlace href={a.calculadora}>Abrir la {nombreCalculadora}</BotonEnlace>
             </div>
           </section>
 

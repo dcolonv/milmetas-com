@@ -18,6 +18,8 @@ export type AreaSlug =
 
 export type Area = {
   slug: AreaSlug;
+  /** What the goals are called in running text, lower case: "metas financieras". */
+  tema: string;
   nombre: string;
   /** Page <h1>. */
   titulo: string;
@@ -43,6 +45,7 @@ export type Area = {
 export const areas: Area[] = [
   {
     slug: "salud-y-bienestar",
+    tema: "metas de salud y bienestar",
     nombre: "Salud y bienestar",
     titulo: "Metas de salud y bienestar: 20 ejemplos medibles",
     tituloSeo: "Metas de salud y bienestar: 20 ejemplos medibles",
@@ -71,10 +74,11 @@ export const areas: Area[] = [
       "Estas metas son ejemplos generales de actividad y descanso, no consejo médico. Si tienes una condición de salud, estás embarazada o vuelves a la actividad tras una lesión, consulta antes con un profesional sanitario.",
     guias: ["metas-y-habitos", "como-saber-si-vas-a-tiempo", "metodo-woop-y-planes-si-entonces"],
     calculadora: "/calculadora/kilometros",
-    actualizado: "2026-11-19",
+    actualizado: "2026-11-25",
   },
   {
     slug: "dinero",
+    tema: "metas financieras",
     nombre: "Dinero",
     titulo: "Metas financieras: 20 ejemplos con número y plazo",
     tituloSeo: "Metas financieras: 20 ejemplos con número y plazo",
@@ -103,10 +107,11 @@ export const areas: Area[] = [
       "Estos ejemplos son aritmética de ahorro, no asesoramiento financiero. No tienen en cuenta intereses, impuestos ni inflación, y no recomiendan ningún producto. Para decisiones de inversión o deudas importantes, consulta con un profesional acreditado.",
     guias: ["metas-financieras", "metas-a-corto-mediano-y-largo-plazo", "como-saber-si-vas-a-tiempo"],
     calculadora: "/calculadora/ahorro",
-    actualizado: "2026-11-19",
+    actualizado: "2026-11-25",
   },
   {
     slug: "estudios",
+    tema: "metas académicas",
     nombre: "Estudios",
     titulo: "Metas académicas: 20 ejemplos para estudiantes",
     tituloSeo: "Metas académicas: 20 ejemplos para estudiantes",
@@ -133,10 +138,11 @@ export const areas: Area[] = [
     ],
     guias: ["metas-academicas", "como-escribir-una-meta-smart", "como-saber-si-vas-a-tiempo"],
     calculadora: "/calculadora/estudio",
-    actualizado: "2026-11-19",
+    actualizado: "2026-11-25",
   },
   {
     slug: "trabajo",
+    tema: "metas laborales y profesionales",
     nombre: "Trabajo",
     titulo: "Metas laborales y profesionales: 20 ejemplos medibles",
     tituloSeo: "Metas laborales y profesionales: 20 ejemplos",
@@ -163,10 +169,11 @@ export const areas: Area[] = [
     ],
     guias: ["metas-laborales-evaluacion-de-desempeno", "okr-personales", "como-escribir-una-meta-smart"],
     calculadora: "/calculadora",
-    actualizado: "2026-11-19",
+    actualizado: "2026-11-25",
   },
   {
     slug: "lectura",
+    tema: "metas de lectura",
     nombre: "Lectura",
     titulo: "Metas de lectura: 20 retos con páginas y plazos",
     tituloSeo: "Metas de lectura: 20 retos con páginas y plazos",
@@ -193,10 +200,11 @@ export const areas: Area[] = [
     ],
     guias: ["reto-de-lectura-paginas-por-dia", "metas-y-habitos", "como-saber-si-vas-a-tiempo"],
     calculadora: "/calculadora/lectura",
-    actualizado: "2026-11-19",
+    actualizado: "2026-11-25",
   },
   {
     slug: "idiomas",
+    tema: "metas para aprender idiomas",
     nombre: "Idiomas",
     titulo: "Metas para aprender idiomas: 20 ejemplos medibles",
     tituloSeo: "Metas para aprender idiomas: 20 ejemplos medibles",
@@ -223,10 +231,11 @@ export const areas: Area[] = [
     ],
     guias: ["metas-y-habitos", "metas-a-corto-mediano-y-largo-plazo", "como-saber-si-vas-a-tiempo"],
     calculadora: "/calculadora/estudio",
-    actualizado: "2026-11-19",
+    actualizado: "2026-11-25",
   },
   {
     slug: "relaciones",
+    tema: "metas de relaciones, familia y amistad",
     nombre: "Relaciones",
     titulo: "Metas de relaciones, familia y amistad: 20 ejemplos",
     tituloSeo: "Metas de relaciones, familia y amistad: 20 ejemplos",
@@ -253,10 +262,11 @@ export const areas: Area[] = [
     ],
     guias: ["metas-y-habitos", "propositos-de-ano-nuevo", "metas-a-corto-mediano-y-largo-plazo"],
     calculadora: "/calculadora",
-    actualizado: "2026-11-19",
+    actualizado: "2026-11-25",
   },
   {
     slug: "hogar",
+    tema: "metas para el hogar y la organización",
     nombre: "Hogar y organización",
     titulo: "Metas para el hogar y la organización: 20 ejemplos",
     tituloSeo: "Metas para el hogar y la organización: 20 ejemplos",
@@ -283,10 +293,11 @@ export const areas: Area[] = [
     ],
     guias: ["como-saber-si-vas-a-tiempo", "metas-y-habitos", "como-escribir-una-meta-smart"],
     calculadora: "/calculadora",
-    actualizado: "2026-11-19",
+    actualizado: "2026-11-25",
   },
   {
     slug: "creatividad",
+    tema: "metas creativas y de proyectos personales",
     nombre: "Creatividad y proyectos",
     titulo: "Metas creativas y de proyectos personales: 20 ejemplos",
     tituloSeo: "Metas creativas y de proyectos personales: 20 ejemplos",
@@ -313,10 +324,11 @@ export const areas: Area[] = [
     ],
     guias: ["metas-y-habitos", "okr-personales", "como-saber-si-vas-a-tiempo"],
     calculadora: "/calculadora",
-    actualizado: "2026-11-19",
+    actualizado: "2026-11-25",
   },
   {
     slug: "viajes-y-experiencias",
+    tema: "metas de viajes y experiencias",
     nombre: "Viajes y experiencias",
     titulo: "Metas de viajes y experiencias: 20 ejemplos con plan",
     tituloSeo: "Metas de viajes y experiencias: 20 ejemplos con plan",
@@ -343,7 +355,7 @@ export const areas: Area[] = [
     ],
     guias: ["metas-financieras", "metas-a-corto-mediano-y-largo-plazo", "propositos-de-ano-nuevo"],
     calculadora: "/calculadora",
-    actualizado: "2026-11-19",
+    actualizado: "2026-11-25",
   },
 ];
 
