@@ -33,6 +33,9 @@ export type Preset = {
   actualizado: string;
 };
 
+/** When the main calculator page (/calculadora) last changed. The pages by kind of goal carry their own date. */
+export const calculadoraActualizada = "2026-11-25";
+
 /** What the main calculator shows before the visitor types anything. */
 export const predeterminados: Predeterminados = {
   meta: "Leer 12 libros",
@@ -47,8 +50,8 @@ export const presets: Preset[] = [
   {
     slug: "ahorro",
     nombre: "Calculadora de ahorro",
-    titulo: "Calculadora de ahorro para una meta: cuánto apartar al mes",
-    tituloSeo: "Calculadora de ahorro: cuánto apartar al mes",
+    titulo: "Calculadora de ahorro para una meta: cuánto ahorrar al mes",
+    tituloSeo: "Calculadora de ahorro: cuánto ahorrar al mes",
     descripcion:
       "Escribe cuánto quieres reunir y para cuándo: la calculadora te dice cuánto ahorrar por día, semana y mes, y si con lo que llevas vas a tiempo.",
     entradilla:
@@ -100,13 +103,13 @@ export const presets: Preset[] = [
     ],
     area: "dinero",
     guia: "metas-financieras",
-    actualizado: "2026-11-19",
+    actualizado: "2026-11-25",
   },
   {
     slug: "lectura",
     nombre: "Calculadora de lectura",
     titulo: "Calculadora de lectura: cuántas páginas leer al día",
-    tituloSeo: "Calculadora de lectura: páginas al día",
+    tituloSeo: "Calculadora de lectura: cuántas páginas leer al día",
     descripcion:
       "Convierte tu reto de lectura en páginas al día. Escribe cuántas páginas o libros quieres leer y hasta cuándo, y comprueba si vas a tiempo.",
     entradilla:
@@ -152,13 +155,13 @@ export const presets: Preset[] = [
     ],
     area: "lectura",
     guia: "reto-de-lectura-paginas-por-dia",
-    actualizado: "2026-11-19",
+    actualizado: "2026-11-25",
   },
   {
     slug: "estudio",
     nombre: "Calculadora de estudio",
-    titulo: "Calculadora de estudio: cuántas horas al día hasta el examen",
-    tituloSeo: "Calculadora de estudio: horas al día",
+    titulo: "Calculadora de estudio: cuántas horas estudiar al día hasta el examen",
+    tituloSeo: "Calculadora de estudio: cuántas horas estudiar al día",
     descripcion:
       "Reparte las horas, los temas o los ejercicios que te faltan hasta el examen. Calcula cuánto estudiar por sesión y comprueba cada semana si vas a tiempo.",
     entradilla:
@@ -203,13 +206,13 @@ export const presets: Preset[] = [
     ],
     area: "estudios",
     guia: "metas-academicas",
-    actualizado: "2026-11-19",
+    actualizado: "2026-11-25",
   },
   {
     slug: "kilometros",
     nombre: "Calculadora de kilómetros",
     titulo: "Calculadora de kilómetros: cuánto correr o caminar por semana",
-    tituloSeo: "Calculadora de kilómetros por semana",
+    tituloSeo: "Calculadora de kilómetros: cuántos km correr por semana",
     descripcion:
       "Reparte un reto de distancia (correr, caminar, nadar o pedalear) en kilómetros por semana y por salida, y comprueba si llevas el ritmo para cumplirlo.",
     entradilla:
@@ -255,7 +258,7 @@ export const presets: Preset[] = [
     ],
     area: "salud-y-bienestar",
     guia: "como-saber-si-vas-a-tiempo",
-    actualizado: "2026-11-19",
+    actualizado: "2026-11-25",
   },
 ];
 

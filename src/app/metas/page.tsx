@@ -4,29 +4,31 @@ import { AdSlot } from "@/components/AdSlot";
 import { BancoFiltro } from "@/components/banco/BancoFiltro";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
-import { Contenedor, Encabezado, Tarjeta } from "@/components/ui";
+import { Actualizado, Contenedor, Encabezado, Tarjeta } from "@/components/ui";
 import { areas } from "@/data/areas";
 import { horizontes, metas, totalMetas } from "@/data/metas";
 import { listarMeta } from "@/lib/banco";
+import { formatearFecha } from "@/lib/fechas";
 import { pageMeta } from "@/lib/seo";
 import { absoluteUrl } from "@/site.config";
 
 const RUTA = "/metas";
-const DESCRIPCION = `${totalMetas} ejemplos de metas medibles, ordenados por área de vida y por plazo. Filtra, elige una y ábrela en la calculadora para saber cuánto toca por semana.`;
+const DESCRIPCION = `${totalMetas} ejemplos de metas personales medibles, por área de vida y por plazo (corto, mediano y largo). Elige una y ábrela en la calculadora para ver su ritmo.`;
 
 export const metadata: Metadata = pageMeta({
-  title: `Banco de metas: ${totalMetas} ejemplos por área y plazo`,
+  title: `${totalMetas} ejemplos de metas personales por área y plazo`,
   description: DESCRIPCION,
   path: RUTA,
 });
 
 export default function Page() {
   const listadas = metas.map(listarMeta);
+  const actualizado = areas.reduce((f, a) => (a.actualizado > f ? a.actualizado : f), areas[0].actualizado);
   return (
     <Contenedor>
       <Encabezado
-        titulo={`Banco de metas: ${totalMetas} ejemplos medibles por área y plazo`}
-        entradilla="Todas tienen una cifra y un plazo, que es lo que permite repartirlas y saber cuándo están cumplidas. Filtra por área o por plazo, y pulsa «Planificar» para abrir cualquiera en la calculadora con sus números."
+        titulo={`Banco de metas: ${totalMetas} ejemplos de metas personales por área y plazo`}
+        entradilla={`Aquí tienes ${totalMetas} ejemplos de metas personales repartidos en ${areas.length} áreas de vida y tres plazos: corto, mediano y largo. Todas tienen una cifra y un plazo, que es lo que permite repartirlas y saber cuándo están cumplidas. Filtra por área o por plazo, y pulsa «Planificar» para abrir cualquiera en la calculadora con sus números.`}
       >
         <Breadcrumbs migas={[{ nombre: "Banco de metas", ruta: RUTA }]} />
       </Encabezado>
@@ -88,6 +90,10 @@ export default function Page() {
           profesional. No incluimos metas de peso, dietas ni inversiones.
         </p>
       </section>
+
+      <div className="mt-8">
+        <Actualizado fecha={actualizado} texto={formatearFecha(actualizado)} />
+      </div>
 
       <JsonLd
         data={{

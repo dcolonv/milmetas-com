@@ -11,6 +11,7 @@ const RUTA = "/acerca";
 
 export const metadata: Metadata = pageMeta({
   title: "Acerca de Mil Metas",
+  absoluteTitle: true,
   description:
     "Qué es Mil Metas, para quién está hecho, cómo se elabora el contenido y cómo se financia: una publicación independiente sobre metas personales.",
   path: RUTA,
