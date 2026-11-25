@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Faq, type Pregunta } from "@/components/Faq";
 import { JsonLd } from "@/components/JsonLd";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { BotonEnlace, Contenedor, Tarjeta } from "@/components/ui";
@@ -29,6 +30,48 @@ const destacadas = [
   "metas-financieras",
   "que-dice-la-investigacion-sobre-fijar-metas",
 ];
+
+/**
+ * What a first-time visitor asks about the site itself. Every answer repeats
+ * something the site already says on /acerca, /como-trabajamos or the
+ * calculator page; the counts come from the data files.
+ */
+function preguntasDelSitio(): Pregunta[] {
+  const editor = site.publisherName
+    ? `${site.name} es una publicación de ${site.publisherName}.`
+    : `${site.name} es una publicación independiente.`;
+  const elaboracion =
+    "El contenido se investiga y se redacta con ayuda de herramientas de inteligencia artificial, se contrasta con las fuentes citadas y se publica bajo la responsabilidad del editor del sitio. Cuando una guía menciona un estudio, enlaza a su fuente original.";
+  return [
+    {
+      pregunta: `¿Qué es ${site.name}?`,
+      respuesta: `${site.name} es un sitio gratuito en español para fijar metas medibles. Tiene tres partes: un banco de ${totalMetas} metas de ejemplo repartidas en ${areas.length} áreas de vida, una calculadora que convierte cualquier meta con cifra y fecha en un ritmo por día, semana y mes y te dice si vas a tiempo, y ${guias.length} guías sobre cómo fijar metas y seguirlas.`,
+    },
+    {
+      pregunta: "¿Es gratis? ¿Hay que registrarse?",
+      respuesta:
+        "Es gratuito y no pide registro. No hay cuentas: la calculadora funciona en tu navegador y tus metas se guardan solo en él, y solo si pulsas «Guardar en este navegador».",
+    },
+    {
+      pregunta: "¿Qué tipo de metas hay en el banco?",
+      respuesta: `Metas de ejemplo con una cantidad, una unidad y un plazo, para que se puedan repartir y comprobar. Están agrupadas en ${areas.length} áreas (${areas.map((a) => a.nombre.toLowerCase()).join("; ")}) y en tres plazos: corto, mediano y largo. No hay metas de peso, dietas, medicación ni inversiones.`,
+    },
+    {
+      pregunta: "¿Quién escribe el contenido y de dónde salen los datos?",
+      respuesta: `${editor} ${elaboracion} El método completo está en «Cómo trabajamos».`,
+      contenido: (
+        <>
+          {editor} {elaboracion} El método completo está en «<Link href="/como-trabajamos" className="enlace">Cómo trabajamos</Link>».
+        </>
+      ),
+    },
+    {
+      pregunta: "¿Sirve como consejo médico o financiero?",
+      respuesta:
+        "No. Las metas de salud y de dinero son ejemplos generales, y la calculadora solo divide: no calcula intereses ni recomienda productos. Para decisiones de salud, de inversión o sobre deudas, consulta con un profesional.",
+    },
+  ];
+}
 
 /** The hero's sample plan: worked example 2, computed with the calculator's own functions. */
 function PlanDeMuestra() {
@@ -205,6 +248,8 @@ export default function Home() {
             <Link href="/acerca">acerca de Mil Metas</Link>.
           </p>
         </section>
+
+        <Faq preguntas={preguntasDelSitio()} titulo={`Preguntas frecuentes sobre ${site.name}`} />
 
         <NewsletterSignup />
       </Contenedor>
